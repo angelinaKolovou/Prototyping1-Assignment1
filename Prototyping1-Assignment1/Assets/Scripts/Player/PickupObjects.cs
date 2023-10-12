@@ -23,6 +23,11 @@ public class PickupObjects : MonoBehaviour
         
     }
 
+    /*------------------UPDATE---------------------------------------------------
+     * Parameters: None
+     * Purpose: On LMB it checks if a pickupable object exists by using a RayCast.
+     *          Gives the object a rigidbody and turns off its gravity. 
+     ---------------------------------------------------------------------------*/
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
@@ -48,7 +53,10 @@ public class PickupObjects : MonoBehaviour
         }
     }
 
-    //Physics pickup 
+    /*------------------FIXED UPDATE---------------------------------------------------
+     * Parameters: none
+     * Purpose: Handles the physics of an object that's being picked up.
+     ---------------------------------------------------------------------------------*/
     private void FixedUpdate()
     {
         //If pickup exist. 

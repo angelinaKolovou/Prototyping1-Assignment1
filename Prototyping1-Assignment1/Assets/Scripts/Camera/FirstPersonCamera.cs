@@ -28,7 +28,7 @@ public class FirstPersonCamera : MonoBehaviour
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * xSensitivity; 
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * ySensitivity;
 
-        //Need for Unity to handle the rotation. 
+        //Needed for Unity to handle the rotation. 
         yRotation += mouseX;
         xRotation -= mouseY; 
 

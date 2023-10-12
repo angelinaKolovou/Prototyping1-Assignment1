@@ -14,6 +14,7 @@ public class MoveCamera : MonoBehaviour
 
     void Update()
     {
+        //Give camera position objects lovation to camera holder.
         transform.position = cameraPosition.position; 
     }
 }

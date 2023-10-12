@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/*==================== PLAYER STATS ============================================
+ * Attaches to: Player (parent)
+ * Attribute(s): maxHealth(), maxPower() 
+ * Purpose: Increases and decreases players stats  
+ ==============================================================================*/
 public class PlayerStats : MonoBehaviour
 {
     [Header("Health")]
@@ -24,6 +29,7 @@ public class PlayerStats : MonoBehaviour
 
         //Power
         currentPower = 10f;
+        powerBar.SetSliderMax(maxHealth);
         powerBar.SetSlider(currentPower); 
     }
 
@@ -34,20 +40,50 @@ public class PlayerStats : MonoBehaviour
             TakeDamage(10f); 
         }
     }
+
+    /*------------------TAKE DAMAGE---------------------------------------------------
+     * Parameters: Damage amount
+     * Purpose: Reduces player health and assigns new value to the 
+     *          healthbar slider.
+     --------------------------------------------------------------------------------*/
     public void TakeDamage(float amount)
     {
         currentHealth -= amount; 
         healthBar.SetSlider(currentHealth);
     }
 
+    /*------------------POWER UP---------------------------------------------------
+     * Parameters: Power up amount
+     * Purpose: Increases player health and power and assigns new values to the 
+     *          healthbar and power sliders.
+     -----------------------------------------------------------------------------*/
     public void PowerUp(float amount)
     {
         //Health
-        currentHealth += amount;
-        healthBar.SetSlider(currentHealth);
+        if (currentHealth >= maxHealth)
+        {
+            maxHealth = currentHealth;
+            healthBar.SetSliderMax(maxHealth);
+            healthBar.SetSlider(currentHealth);
+        }
+        else
+        {
+            currentHealth += amount;
+            healthBar.SetSlider(currentHealth);
+        }
 
         //Power
-        currentPower += amount; 
-        powerBar.SetSlider(currentPower); 
+        if (currentPower >= maxPower)
+        {
+            maxPower = currentPower;
+            powerBar.SetSliderMax(maxPower);
+            powerBar.SetSlider(currentPower);
+        }
+        else
+        {
+            currentPower += amount;
+            powerBar.SetSlider(currentPower);
+        }
+
     }
 }

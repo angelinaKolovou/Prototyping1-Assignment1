@@ -31,4 +31,10 @@ public class Powerup : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Update()
+    {
+        //Rotate object
+        transform.localEulerAngles = new Vector3(3, 0, 20); 
+    }
 }

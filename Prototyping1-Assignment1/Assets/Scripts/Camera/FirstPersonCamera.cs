@@ -9,10 +9,9 @@ using UnityEngine;
  ==============================================================================*/
 public class FirstPersonCamera : MonoBehaviour
 {
-    public float xSensitivity, ySensitivity;
-
     public Transform orientation;
 
+    [SerializeField] float xSensitivity, ySensitivity;
     float xRotation, yRotation; 
 
     void Start()
@@ -20,6 +19,9 @@ public class FirstPersonCamera : MonoBehaviour
         //Lock cursor to screen and hide it. 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        //Start rotation speed
+        SetRotationSpeed(200f, 200f); 
     }
 
     void Update()
@@ -41,5 +43,16 @@ public class FirstPersonCamera : MonoBehaviour
         //Rotation for player orientation on the Y axis
         orientation.rotation = Quaternion.Euler(0, yRotation, 0); 
 
+    }
+
+
+    /*------------------SET ROTATION SPEED--------------------------------------------------
+     * Parameters: float for camra rotation speed 
+     * Purpose: Used by state script to change camera rotation speed. 
+     ---------------------------------------------------------------------------------*/
+    public void SetRotationSpeed(float xSens, float ySens)
+    {
+        xSensitivity = xSens;
+        ySensitivity = ySens;
     }
 }

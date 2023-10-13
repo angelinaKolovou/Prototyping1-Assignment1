@@ -12,6 +12,7 @@ public class TriggerDoorController : MonoBehaviour
 {
     [SerializeField] private Animator door = null;
     [SerializeField] private bool openTrigger = false, closeTrigger = false;
+    bool keyOn = false; 
 
 
     /*------------------On Trigger Enter---------------------------------------------------
@@ -20,9 +21,17 @@ public class TriggerDoorController : MonoBehaviour
      -------------------------------------------------------------------------------------*/
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Key") || other.CompareTag("Player"))
+        if (other.CompareTag("Key"))
         {
             if (openTrigger)
+            {
+                keyOn = true; 
+                door.Play("DoorOpen", 0, 0.0f);
+            }
+        }
+        else if(other.CompareTag("Player"))
+        {
+            if (openTrigger && !keyOn)
             {
                 door.Play("DoorOpen", 0, 0.0f);
             }
@@ -31,13 +40,27 @@ public class TriggerDoorController : MonoBehaviour
 
     /*------------------On Trigger Exit---------------------------------------------------
      * Parameters: Collider
-     * Purpose: If player or key exits the buttons collider then the door will close
+     * Purpose: closes the door if player or key exits button. But not if 
+     *          player exits button and key doesnt. 
      -------------------------------------------------------------------------------------*/
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Key") || other.CompareTag("Player"))
+        if (other.CompareTag("Key"))
         {
-            if (closeTrigger)
+            if (openTrigger)
+            {
+                keyOn = false;
+                door.Play("DoorClose", 0, 0.0f);
+            }
+        }
+        else if (other.CompareTag("Player"))
+        {
+            if(closeTrigger)
+            {
+                door.Play("DoorClose", 0, 0.0f);
+                Destroy(gameObject); 
+            }
+            else if(openTrigger && !keyOn) 
             {
                 door.Play("DoorClose", 0, 0.0f);
             }

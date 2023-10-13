@@ -16,11 +16,12 @@ public class PickupObjects : MonoBehaviour
     [SerializeField] Transform PickupPoint;
     [Space]
     [SerializeField] float PickupRange;
-    Rigidbody currentObject; 
+    Rigidbody currentObject;
 
+    public bool carryingObject;
     void Start()
     {
-        
+        carryingObject = false;
     }
 
     /*------------------UPDATE---------------------------------------------------
@@ -32,23 +33,25 @@ public class PickupObjects : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            // If a pickup object exists turn gravity on. 
+            // Player releases object. gravity gets turned on. 
             if(currentObject)
             {
                 currentObject.useGravity = true;
                 currentObject = null;
+                carryingObject = false;
                 return; 
             }
-
 
             // Raycast checks if there's an object to pickup within range 
             Ray CameraRay = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f)); 
 
-            //Assigns the object a rigidbody and turns off its gravity. 
+            //Player picks up object. gravity is turned off
             if(Physics.Raycast(CameraRay, out RaycastHit HitInfo, PickupRange, PickupMask))
             {
                 currentObject = HitInfo.rigidbody; 
                 currentObject.useGravity = false;
+                carryingObject = true;
+
             }
         }
     }

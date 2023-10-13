@@ -1,77 +1,55 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.MemoryProfiler;
 using UnityEngine;
 
 /*==================== PLAYER STATS ============================================
  * Attaches to: Player (parent)
- * Attribute(s): maxHealth(), maxPower() 
+ * Attribute(s): maxPower() 
  * Purpose: Increases and decreases players stats  
  ==============================================================================*/
 public class PlayerStats : MonoBehaviour
 {
-    [Header("Health")]
-    [SerializeField] float maxHealth;
-    float currentHealth;
-    public Health healthBar;
-
     [Header("Power")]
     [SerializeField] float maxPower; 
     float currentPower;
-    public Power powerBar; 
+    public Power powerBar;
+
+    [Header("Grow")]
+    [SerializeField] float newScale;
+
+    [Header("States")]
+    public int numOfPowerups;
+
+    [Header("Change Photo")]
+    ChangeProfileImage changePhoto; 
     
 
     void Start()
     {
-        //Health
-        currentHealth = maxHealth;
-        healthBar.SetSliderMax(maxHealth);
-
         //Power
         currentPower = 10f;
-        powerBar.SetSliderMax(maxHealth);
-        powerBar.SetSlider(currentPower); 
+        powerBar.SetSliderMax(maxPower);
+        powerBar.SetSlider(currentPower);
+
+        //Grow
+        newScale = 1;
+ 
     }
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            TakeDamage(10f); 
-        }
-    }
-
-    /*------------------TAKE DAMAGE---------------------------------------------------
-     * Parameters: Damage amount
-     * Purpose: Reduces player health and assigns new value to the 
-     *          healthbar slider.
-     --------------------------------------------------------------------------------*/
-    public void TakeDamage(float amount)
-    {
-        currentHealth -= amount; 
-        healthBar.SetSlider(currentHealth);
     }
 
     /*------------------POWER UP---------------------------------------------------
      * Parameters: Power up amount
-     * Purpose: Increases player health and power and assigns new values to the 
-     *          healthbar and power sliders.
+     * Purpose: Increases players power and assigns new values to the 
+     *          power slider.
      -----------------------------------------------------------------------------*/
     public void PowerUp(float amount)
     {
-        //Health
-        if (currentHealth >= maxHealth)
-        {
-            maxHealth = currentHealth;
-            healthBar.SetSliderMax(maxHealth);
-            healthBar.SetSlider(currentHealth);
-        }
-        else
-        {
-            currentHealth += amount;
-            healthBar.SetSlider(currentHealth);
-        }
-
         //Power
         if (currentPower >= maxPower)
         {
@@ -85,5 +63,55 @@ public class PlayerStats : MonoBehaviour
             powerBar.SetSlider(currentPower);
         }
 
+        numOfPowerups++;
+        GrowPlayer();
+        ChangeProfilePhoto(); 
+    }
+
+    /*------------------GROW PLAYER---------------------------------------------------
+     * Parameters: None
+     * Purpose: Makes the players body bigger everytime they pick up 
+     *          a powerup. 
+     -----------------------------------------------------------------------------*/
+    public void GrowPlayer()
+    {
+        newScale = newScale + 0.2f;
+        transform.localScale = new Vector3(newScale, newScale, newScale); 
+    }
+
+    /*------------------CHANGE PROFILE PHOTO----------------------------------------
+     * Parameters: None
+     * Purpose: Changes the profile photo on the UI depending on how many 
+     *          powerups have been collected. 
+     * FIX: 
+     * Value not assigend? 
+     -----------------------------------------------------------------------------*/
+    public void ChangeProfilePhoto()
+    {
+        switch(numOfPowerups)
+        {
+            case 0:
+                changePhoto.NextProfilePhoto(); 
+                break; 
+            case 3:
+                Debug.Log("Next photo");
+                changePhoto.NextProfilePhoto();
+                break;
+            case 9:
+                changePhoto.NextProfilePhoto();
+                break;
+            case 13:
+                changePhoto.NextProfilePhoto();
+                break;
+            case 15:
+                changePhoto.NextProfilePhoto();
+                break;
+            case 17:
+                changePhoto.NextProfilePhoto();
+                break;
+            case 19:
+                changePhoto.NextProfilePhoto();
+                break;
+        }
     }
 }

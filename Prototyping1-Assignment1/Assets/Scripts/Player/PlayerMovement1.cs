@@ -11,15 +11,16 @@ using UnityEngine;
 public class PlayerMovement1 : MonoBehaviour
 {
     [Header("Movement")]
-    public float movementSpeed, groundDrag;
+    public float groundDrag;
     public Transform orientation;
 
+    [SerializeField] float movementSpeed;
     float horizontalInput, verticalInput;
     Vector3 moveDirection;
 
     [Header("Ground Check")]
     public float playerHeight;
-    public LayerMask isGround; 
+    public LayerMask isGround;
 
     bool onGround; 
 
@@ -29,6 +30,8 @@ public class PlayerMovement1 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+
+        SetMovementSpeed(2f); 
     }
 
     void Update()
@@ -93,4 +96,15 @@ public class PlayerMovement1 : MonoBehaviour
             rb.velocity = new Vector3(limitVelocity.x, rb.velocity.y, limitVelocity.z); 
         }
     }
+
+
+    /*------------------SET MOVEMENT SPEED----------------------------------------------
+     * Parameters: float for movement speed
+     * Purpose: Used by state script to change player movement speed. 
+     ---------------------------------------------------------------------------------*/
+    public void SetMovementSpeed(float speed)
+    {
+        movementSpeed = speed;
+    }
+
 }

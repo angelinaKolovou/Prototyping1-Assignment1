@@ -26,14 +26,16 @@ public class PickupObjects : MonoBehaviour
 
     /*------------------UPDATE---------------------------------------------------
      * Parameters: None
-     * Purpose: On LMB it checks if a pickupable object exists by using a RayCast.
-     *          Gives the object a rigidbody and turns off its gravity. 
+     * Purpose: On LMB it checks if the player is holding an object by 
+     *          using a RayCast. if the player is holding an object 
+     *          they player will drop it and the object will have gravity turn
+     *          back on. if not, the player will pick up the object.
      ---------------------------------------------------------------------------*/
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
-            // Player releases object. gravity gets turned on. 
+            // Player releases object. gravity is turned on. 
             if(currentObject)
             {
                 currentObject.useGravity = true;
@@ -42,7 +44,7 @@ public class PickupObjects : MonoBehaviour
                 return; 
             }
 
-            // Raycast checks if there's an object to pickup within range 
+            //Holds object in the same rotation as camera 
             Ray CameraRay = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f)); 
 
             //Player picks up object. gravity is turned off

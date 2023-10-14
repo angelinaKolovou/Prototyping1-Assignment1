@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /*==================== PLAYER STATS ============================================
  * Attaches to: Player (parent)
@@ -24,9 +21,6 @@ public class PlayerStats : MonoBehaviour
 
     [Header("States")]
     static public int numOfPowerups;
-
-    [Header("Change Photo")]
-    ChangeProfileImage changePhoto;
 
     [Header("Lifting")]
     [SerializeField] bool canLift;

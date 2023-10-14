@@ -58,7 +58,6 @@ public class TriggerDoorController : MonoBehaviour
             if(closeTrigger)
             {
                 door.Play("DoorClose", 0, 0.0f);
-                Destroy(gameObject); 
             }
             else if(openTrigger && !keyOn) 
             {

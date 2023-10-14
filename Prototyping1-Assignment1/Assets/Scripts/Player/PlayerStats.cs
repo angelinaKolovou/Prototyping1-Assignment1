@@ -75,9 +75,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         numOfPowerups++;
-        Debug.Log(numOfPowerups); 
         GrowPlayer();
-        //ChangeProfilePhoto(); 
     }
 
     /*------------------GROW PLAYER---------------------------------------------------
@@ -89,40 +87,5 @@ public class PlayerStats : MonoBehaviour
     {
         newScale = newScale + 0.1f;
         transform.localScale = new Vector3(newScale, newScale, newScale); 
-    }
-
-    /*------------------CHANGE PROFILE PHOTO----------------------------------------
-     * Parameters: None
-     * Purpose: Changes the profile photo on the UI depending on how many 
-     *          powerups have been collected. 
-     * FIX: 
-     * Value not assigend? 
-     -----------------------------------------------------------------------------*/
-    public void ChangeProfilePhoto()
-    {
-        switch(numOfPowerups)
-        {
-            case 0:
-                ChangeProfileImage.NextProfilePhoto(); 
-                break; 
-            case 3:
-                ChangeProfileImage.NextProfilePhoto();
-                break;
-            case 9:
-                ChangeProfileImage.NextProfilePhoto();
-                break;
-            case 13:
-                ChangeProfileImage.NextProfilePhoto();
-                break;
-            case 15:
-                ChangeProfileImage.NextProfilePhoto();
-                break;
-            case 17:
-                ChangeProfileImage.NextProfilePhoto();
-                break;
-            case 19:
-                ChangeProfileImage.NextProfilePhoto();
-                break;
-        }
     }
 }

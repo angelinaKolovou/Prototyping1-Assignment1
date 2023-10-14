@@ -66,7 +66,7 @@ public class ChangeProfileImage : MonoBehaviour
             case 0:
                 next = true;
                 break;
-            case 3:
+            case 6:
                 next = true;
                 break;
             case 9:

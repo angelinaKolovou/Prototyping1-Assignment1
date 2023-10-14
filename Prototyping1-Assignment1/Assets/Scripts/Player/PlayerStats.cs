@@ -85,7 +85,7 @@ public class PlayerStats : MonoBehaviour
      -----------------------------------------------------------------------------*/
     public void GrowPlayer()
     {
-        newScale = newScale + 0.1f;
+        newScale = newScale + 0.17f;
         transform.localScale = new Vector3(newScale, newScale, newScale); 
     }
 }

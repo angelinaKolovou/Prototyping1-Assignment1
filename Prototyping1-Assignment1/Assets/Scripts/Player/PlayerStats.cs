@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.MemoryProfiler;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*==================== PLAYER STATS ============================================
  * Attaches to: Player (parent)
@@ -26,6 +27,10 @@ public class PlayerStats : MonoBehaviour
 
     [Header("Change Photo")]
     ChangeProfileImage changePhoto;
+
+    [Header("Lifting")]
+    [SerializeField] bool canLift;
+
 
     void Start()
     {
@@ -70,6 +75,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         numOfPowerups++;
+        Debug.Log(numOfPowerups); 
         GrowPlayer();
         //ChangeProfilePhoto(); 
     }
@@ -81,7 +87,7 @@ public class PlayerStats : MonoBehaviour
      -----------------------------------------------------------------------------*/
     public void GrowPlayer()
     {
-        newScale = newScale + 0.2f;
+        newScale = newScale + 0.1f;
         transform.localScale = new Vector3(newScale, newScale, newScale); 
     }
 

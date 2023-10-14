@@ -17,7 +17,7 @@ public class GodModeState : PlayerBaseState
      ---------------------------------------------------------------------------*/
     public override void EnterState(PlayerStateManager player)
     {
-        movSpeed = 7f;
+        movSpeed = 5f;
         rotSpeed = 200f;
 
         PlayerMovement1.SetMovementSpeed(movSpeed);

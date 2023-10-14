@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /*==================== FIRST PERSON CAMERA =====================================
  * Attaches to: Player (parent)
  * Attribute(s): movementSpeed(), orientation(player.orientation) 
@@ -13,8 +12,7 @@ public class PlayerMovement1 : MonoBehaviour
     [Header("Movement")]
     public float groundDrag;
     public Transform orientation;
-    [SerializeField] static float movementSpeed;
-
+    static public float movementSpeed;
 
     float horizontalInput, verticalInput;
     Vector3 moveDirection; 
@@ -104,6 +102,7 @@ public class PlayerMovement1 : MonoBehaviour
     static public void SetMovementSpeed(float speed)
     {
         movementSpeed = speed;
+        Debug.Log(movementSpeed); 
     }
 
 }

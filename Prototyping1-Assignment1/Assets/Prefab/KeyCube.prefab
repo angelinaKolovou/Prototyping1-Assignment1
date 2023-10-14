@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9120426488293934168}
   - component: {fileID: 8963081763734591989}
   - component: {fileID: 4633316895305512319}
+  - component: {fileID: 7804413723175596694}
   m_Layer: 8
   m_Name: KeyCube
   m_TagString: Key
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 688515310973641421}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.37, y: 0.46, z: -32.33}
   m_LocalScale: {x: 0.89855, y: 0.80013, z: 0.76062673}
   m_ConstrainProportionsScale: 0
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a71b30240bcfa8b4c89675eef1877ccf, type: 2}
+  - {fileID: 2100000, guid: f3a5c4cb2324578408210fdd8a29f8df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -133,3 +134,15 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7804413723175596694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688515310973641421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e4799fd6b6118341a49cdd0538959d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

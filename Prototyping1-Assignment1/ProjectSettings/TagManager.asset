@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Key
   - PowerUp
+  - Canvas
   layers:
   - Default
   - TransparentFX

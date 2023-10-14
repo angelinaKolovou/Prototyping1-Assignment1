@@ -18,7 +18,8 @@ public class PickupObjects : MonoBehaviour
     [SerializeField] float PickupRange;
     Rigidbody currentObject;
 
-    static public bool carryingObject;
+    static public bool carryingObject; 
+    [SerializeField] bool canLift;
     void Start()
     {
         carryingObject = false;
@@ -30,29 +31,39 @@ public class PickupObjects : MonoBehaviour
      *          using a RayCast. if the player is holding an object 
      *          they player will drop it and the object will have gravity turn
      *          back on. if not, the player will pick up the object.
+     *          Can only run lift code if player is strong enough
      ---------------------------------------------------------------------------*/
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if(CheckIfCanLift())
         {
-            // Player releases object. gravity is turned on. 
-            if(currentObject)
-            {
-                currentObject.useGravity = true;
-                currentObject = null;
-                carryingObject = false;
-                return; 
-            }
+            Debug.Log("Can Lift " + canLift); 
+            KeyCube.ChangeColour(canLift);
 
-            //Holds object in the same rotation as camera 
-            Ray CameraRay = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f)); 
-
-            //Player picks up object. gravity is turned off
-            if(Physics.Raycast(CameraRay, out RaycastHit HitInfo, PickupRange, PickupMask))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                currentObject = HitInfo.rigidbody; 
-                currentObject.useGravity = false;
-                carryingObject = true;
+                // Player releases object. gravity is turned on. 
+                if (currentObject)
+                {
+                    currentObject.useGravity = true;
+                    currentObject = null;
+                    carryingObject = false;
+                    return;
+                }
+
+                //Holds object in the same rotation as camera 
+                Ray CameraRay = PlayerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+                //Player picks up object. gravity is turned off
+                if (Physics.Raycast(CameraRay, out RaycastHit HitInfo, PickupRange, PickupMask))
+                {
+                    currentObject = HitInfo.rigidbody;
+                    currentObject.useGravity = false;
+                    carryingObject = true;
+
+                }
+
+                canLift = false;
 
             }
         }
@@ -73,5 +84,26 @@ public class PickupObjects : MonoBehaviour
 
             currentObject.velocity = DirectionToPoint * 12f * DistanceToPoint; 
         }
+    }
+
+    /*------------------FIXED UPDATE---------------------------------------------------
+     * Parameters: Bool CanLift
+     * Purpose: Makes sure the player has picked up all the powerups 
+     *          before it lets them pick up the key
+     ---------------------------------------------------------------------------------*/
+    private bool CheckIfCanLift()
+    {
+        float num = PlayerStats.numOfPowerups;
+
+        if (num == 0 || num == 6 || num == 9)
+        {
+            canLift = true;
+        }
+        else
+        {
+            canLift = false;
+        }
+        return canLift; 
+
     }
 }

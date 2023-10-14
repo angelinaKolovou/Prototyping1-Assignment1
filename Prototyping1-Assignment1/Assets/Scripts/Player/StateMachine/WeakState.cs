@@ -2,22 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*==================== WEAK STATE ============================================
+ * Attaches to: None
+ * Attribute(s): Private 
+ * Purpose: Handles player movement during weak state.  
+ ==============================================================================*/
 public class WeakState : PlayerBaseState
 {
-    PlayerStats playerStats;
-    PlayerMovement1 playerMovement;
-    FirstPersonCamera playerCamera;
-    PickupObjects pickupObjects;
     [SerializeField] float movSpeed, rotSpeed;
-
-
-
-    /*------------------GROW PLAYER---------------------------------------------------
-     * Parameters: None
-     * Purpose: Set movement speed and camera rotation to low
-     *          sliglty uncomfortable number. 
-     *          Slow down more when carrying something 
-     -----------------------------------------------------------------------------*/
+    int oldNumOfPowerUps, newNumOfPowerUps;
 
     /*------------------ENTER STATE----------------------------------------------
      * Parameters: player
@@ -28,8 +21,8 @@ public class WeakState : PlayerBaseState
         movSpeed = 2f;
         rotSpeed = 100f;
 
-        playerMovement.SetMovementSpeed(movSpeed);
-        playerCamera.SetRotationSpeed(rotSpeed, rotSpeed);
+        PlayerMovement1.SetMovementSpeed(movSpeed);
+        FirstPersonCamera.SetRotationSpeed(rotSpeed, rotSpeed);
     }
 
     /*------------------UPDATE STATE---------------------------------------------
@@ -39,30 +32,34 @@ public class WeakState : PlayerBaseState
      ---------------------------------------------------------------------------*/
     public override void UpdateState(PlayerStateManager player) 
     {
-        //If the player is carrying something then slow down rotation and speed
-        if (pickupObjects.carryingObject)
+        newNumOfPowerUps = PlayerStats.numOfPowerups;
+
+        if (newNumOfPowerUps < 9)
         {
-            movSpeed = movSpeed - 0.5f;
-            rotSpeed = rotSpeed - 50f;
+           if(newNumOfPowerUps > oldNumOfPowerUps)
+            {
+                movSpeed = movSpeed + 0.3f;
+                rotSpeed = rotSpeed + 20f;
 
-            playerMovement.SetMovementSpeed(movSpeed);
-            playerCamera.SetRotationSpeed(rotSpeed, rotSpeed);
+                oldNumOfPowerUps = newNumOfPowerUps;
+            }
+
+           /*
+            if (PickupObjects.carryingObject)
+            {
+                movSpeed = movSpeed - 0.5f;
+                rotSpeed = rotSpeed - 20f;
+            }
+           */
+
         }
-        else
-        {
-            movSpeed = 2f;
-            rotSpeed = 100f;
-
-            playerMovement.SetMovementSpeed(movSpeed);
-            playerCamera.SetRotationSpeed(rotSpeed, rotSpeed);
-
-        }
-
-        //If the player collects 9 powerups 
-        if (playerStats.numOfPowerups == 9)
+        else if (PlayerStats.numOfPowerups == 9)
         {
             player.SwitchState(player.godModeState); 
         }
+
+        PlayerMovement1.SetMovementSpeed(movSpeed);
+        FirstPersonCamera.SetRotationSpeed(rotSpeed, rotSpeed);
     }
 
 }

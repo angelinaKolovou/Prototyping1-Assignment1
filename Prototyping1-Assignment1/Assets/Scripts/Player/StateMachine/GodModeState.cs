@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*==================== GOD MODE STATE ============================================
+ * Attaches to: None
+ * Attribute(s): Private 
+ * Purpose: Handles player movement during God Mode state.  
+ ==============================================================================*/
 public class GodModeState : PlayerBaseState
 {
-    PlayerStats playerStats;
-
-    PlayerMovement1 playerMovement;
-    FirstPersonCamera playerCamera;
-
     [SerializeField] float movSpeed, rotSpeed;
 
     /*------------------ENTER STATE----------------------------------------------
@@ -20,8 +20,8 @@ public class GodModeState : PlayerBaseState
         movSpeed = 7f;
         rotSpeed = 200f;
 
-        playerMovement.SetMovementSpeed(movSpeed);
-        playerCamera.SetRotationSpeed(rotSpeed, rotSpeed);
+        PlayerMovement1.SetMovementSpeed(movSpeed);
+        FirstPersonCamera.SetRotationSpeed(rotSpeed, rotSpeed);
     }
 
 
@@ -31,7 +31,7 @@ public class GodModeState : PlayerBaseState
      ---------------------------------------------------------------------------*/
     public override void UpdateState(PlayerStateManager player)
     {
-        if(playerStats.numOfPowerups == 13)
+        if(PlayerStats.numOfPowerups == 13)
         {
             player.SwitchState(player.shutDonwState);
         }

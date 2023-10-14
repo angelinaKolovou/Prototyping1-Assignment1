@@ -11,7 +11,7 @@ public class FirstPersonCamera : MonoBehaviour
 {
     public Transform orientation;
 
-    [SerializeField] float xSensitivity, ySensitivity;
+    [SerializeField] static float xSensitivity, ySensitivity;
     float xRotation, yRotation; 
 
     void Start()
@@ -50,7 +50,7 @@ public class FirstPersonCamera : MonoBehaviour
      * Parameters: float for camra rotation speed 
      * Purpose: Used by state script to change camera rotation speed. 
      ---------------------------------------------------------------------------------*/
-    public void SetRotationSpeed(float xSens, float ySens)
+    static public void SetRotationSpeed(float xSens, float ySens)
     {
         xSensitivity = xSens;
         ySensitivity = ySens;

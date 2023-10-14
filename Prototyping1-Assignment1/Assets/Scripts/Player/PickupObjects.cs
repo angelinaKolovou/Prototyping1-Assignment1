@@ -18,7 +18,7 @@ public class PickupObjects : MonoBehaviour
     [SerializeField] float PickupRange;
     Rigidbody currentObject;
 
-    public bool carryingObject;
+    static public bool carryingObject;
     void Start()
     {
         carryingObject = false;

@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*==================== SHUT DOWN STATE ============================================
+ * Attaches to: None
+ * Attribute(s): Private 
+ * Purpose: Handles player movement during Shut Down state.  
+ ==============================================================================*/
 public class ShutDownState : PlayerBaseState
-
 {
-    PlayerStats playerStats;
-
-    PlayerMovement1 playerMovement;
-    FirstPersonCamera playerCamera;
-
     [SerializeField] float movSpeed, rotSpeed;
-    int oldNumOfPowerups;
+    int oldNumOfPowerUps, newNumOfPowerUps;
 
     /*------------------ENTER STATE----------------------------------------------
      * Parameters: player
@@ -22,8 +21,8 @@ public class ShutDownState : PlayerBaseState
         movSpeed = 7f;
         rotSpeed = 200f;
 
-        playerMovement.SetMovementSpeed(movSpeed);
-        playerCamera.SetRotationSpeed(rotSpeed, rotSpeed);
+        PlayerMovement1.SetMovementSpeed(movSpeed);
+        FirstPersonCamera.SetRotationSpeed(rotSpeed, rotSpeed);
     }
 
 
@@ -34,17 +33,21 @@ public class ShutDownState : PlayerBaseState
      ---------------------------------------------------------------------------*/
     public override void UpdateState(PlayerStateManager player)
     {
-        int newNumOfPowerups = playerStats.numOfPowerups;
 
-        if (newNumOfPowerups > oldNumOfPowerups)
+        if (newNumOfPowerUps > oldNumOfPowerUps)
         {
             movSpeed = movSpeed - 0.5f;
             rotSpeed = rotSpeed - 14f;
 
-            playerMovement.SetMovementSpeed(movSpeed);
-            playerCamera.SetRotationSpeed(rotSpeed, rotSpeed);
+            oldNumOfPowerUps = newNumOfPowerUps;
+        }
 
-            oldNumOfPowerups = newNumOfPowerups;
+        PlayerMovement1.SetMovementSpeed(movSpeed);
+        FirstPersonCamera.SetRotationSpeed(rotSpeed, rotSpeed);
+
+        if (newNumOfPowerUps < 1 ) 
+        {
+            Debug.Log("Game Over"); 
         }
     }
 }

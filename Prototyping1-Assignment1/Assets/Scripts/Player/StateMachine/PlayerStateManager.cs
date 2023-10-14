@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*==================== STATE MANAGER ============================================
- * Attaches to: 
+ * Attaches to: Player (parent)
  * Attribute(s): 
  * Purpose: Context for state machine 
  ==============================================================================*/

@@ -16,16 +16,16 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float maxPower; 
     float currentPower;
     public Power powerBar;
+    float newPowerBarSize; 
 
     [Header("Grow")]
     [SerializeField] float newScale;
 
     [Header("States")]
-    public int numOfPowerups;
+    static public int numOfPowerups;
 
     [Header("Change Photo")]
-    ChangeProfileImage changePhoto; 
-    
+    ChangeProfileImage changePhoto;
 
     void Start()
     {
@@ -36,6 +36,9 @@ public class PlayerStats : MonoBehaviour
 
         //Grow
         newScale = 1;
+
+        //Get photos 
+        
  
     }
 
@@ -53,6 +56,9 @@ public class PlayerStats : MonoBehaviour
         //Power
         if (currentPower >= maxPower)
         {
+            newPowerBarSize = newPowerBarSize + 0.2f;
+            transform.localScale = new Vector3(newPowerBarSize, 0, 0);
+
             maxPower = currentPower;
             powerBar.SetSliderMax(maxPower);
             powerBar.SetSlider(currentPower);
@@ -65,7 +71,7 @@ public class PlayerStats : MonoBehaviour
 
         numOfPowerups++;
         GrowPlayer();
-        ChangeProfilePhoto(); 
+        //ChangeProfilePhoto(); 
     }
 
     /*------------------GROW PLAYER---------------------------------------------------
@@ -91,26 +97,25 @@ public class PlayerStats : MonoBehaviour
         switch(numOfPowerups)
         {
             case 0:
-                changePhoto.NextProfilePhoto(); 
+                ChangeProfileImage.NextProfilePhoto(); 
                 break; 
             case 3:
-                Debug.Log("Next photo");
-                changePhoto.NextProfilePhoto();
+                ChangeProfileImage.NextProfilePhoto();
                 break;
             case 9:
-                changePhoto.NextProfilePhoto();
+                ChangeProfileImage.NextProfilePhoto();
                 break;
             case 13:
-                changePhoto.NextProfilePhoto();
+                ChangeProfileImage.NextProfilePhoto();
                 break;
             case 15:
-                changePhoto.NextProfilePhoto();
+                ChangeProfileImage.NextProfilePhoto();
                 break;
             case 17:
-                changePhoto.NextProfilePhoto();
+                ChangeProfileImage.NextProfilePhoto();
                 break;
             case 19:
-                changePhoto.NextProfilePhoto();
+                ChangeProfileImage.NextProfilePhoto();
                 break;
         }
     }

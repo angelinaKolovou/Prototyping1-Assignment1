@@ -7,8 +7,6 @@ using UnityEngine;
  ==============================================================================*/
 public abstract class PlayerBaseState 
 {
-    PlayerStats stats; 
-   public abstract void EnterState(PlayerStateManager player);
-   public abstract void UpdateState(PlayerStateManager player); 
-
+    public abstract void EnterState(PlayerStateManager player);
+    public abstract void UpdateState(PlayerStateManager player);
 }

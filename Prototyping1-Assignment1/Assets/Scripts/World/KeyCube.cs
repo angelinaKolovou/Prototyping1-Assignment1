@@ -14,6 +14,10 @@ public class KeyCube : MonoBehaviour
     static public void ChangeColour(bool canLift)
     {
         if (canLift)
+        {
+            Debug.Log("New Colour");
             ren.material.color = Color.yellow;
+
+        }
     }
 }

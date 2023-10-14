@@ -35,11 +35,8 @@ public class PickupObjects : MonoBehaviour
      ---------------------------------------------------------------------------*/
     void Update()
     {
-        if(CheckIfCanLift())
+        if(CheckIfCanLift() == true)
         {
-            Debug.Log("Can Lift " + canLift); 
-            KeyCube.ChangeColour(canLift);
-
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 // Player releases object. gravity is turned on. 
@@ -62,9 +59,6 @@ public class PickupObjects : MonoBehaviour
                     carryingObject = true;
 
                 }
-
-                canLift = false;
-
             }
         }
     }
@@ -93,9 +87,7 @@ public class PickupObjects : MonoBehaviour
      ---------------------------------------------------------------------------------*/
     private bool CheckIfCanLift()
     {
-        float num = PlayerStats.numOfPowerups;
-
-        if (num == 0 || num == 6 || num == 9)
+        if (PlayerStats.numOfPowerups == 0 || PlayerStats.numOfPowerups == 6 || PlayerStats.numOfPowerups == 9)
         {
             canLift = true;
         }

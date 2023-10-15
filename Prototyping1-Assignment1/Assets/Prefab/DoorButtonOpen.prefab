@@ -118,6 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f7377de458a1442bbab096f83e1426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  door: {fileID: 6338522008581779666, guid: 6df20e2c901334c4f8568b910339cc3e, type: 3}
+  door: {fileID: 0}
   openTrigger: 1
   closeTrigger: 0

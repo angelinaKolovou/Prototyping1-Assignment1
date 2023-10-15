@@ -73,7 +73,7 @@ public class WeakState : PlayerBaseState
     }
     public void SlowDownPlayer()
     {
-        movSpeed = movSpeed - 1f; 
+        movSpeed = movSpeed - 1.5f; 
         rotSpeed = rotSpeed - 20f;
 
         PlayerMovement1.SetMovementSpeed(movSpeed);
@@ -84,7 +84,7 @@ public class WeakState : PlayerBaseState
 
     public void RestoreSpeed()
     {
-        movSpeed = movSpeed + 1f;
+        movSpeed = movSpeed + 1.5f;
         rotSpeed = rotSpeed + 20f;
 
         PlayerMovement1.SetMovementSpeed(movSpeed);

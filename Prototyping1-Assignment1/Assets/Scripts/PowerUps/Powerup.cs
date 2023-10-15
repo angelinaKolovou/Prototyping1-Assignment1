@@ -34,7 +34,6 @@ public class Powerup : MonoBehaviour
 
     private void Update()
     {
-        //Rotate object
-        transform.localEulerAngles = new Vector3(3, 0, 20); 
+
     }
 }

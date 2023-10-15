@@ -19,9 +19,6 @@ public class FirstPersonCamera : MonoBehaviour
         //Lock cursor to screen and hide it. 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        //Start rotation speed
-        SetRotationSpeed(200f, 200f); 
     }
 
     void Update()
